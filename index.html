@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +8,38 @@
 <body>
     <h1>Carrito de compras</h1>
 
+    <!-- Campos de entrada para agregar vinos al carrito -->
+    <div>
+        <label for="nombre-input">Nombre del vino:</label>
+        <input type="text" id="nombre-input">
+    </div>
+    <div>
+        <label for="precio-input">Precio del vino:</label>
+        <input type="number" id="precio-input" step="0.01">
+    </div>
+    <div>
+        <label for="cantidad-input">Cantidad:</label>
+        <input type="number" id="cantidad-input" step="1">
+    </div>
+
+    <button id="agregar-button">Agregar bebida</button>
+
+    <!-- Mostrar resultados del filtro por precio -->
+    <div>
+        <label for="filtro-precio-input">Filtrar por precio igual o menor a:</label>
+        <input type="number" id="filtro-precio-input" step="0.01">
+    </div>
+
+    <button id="filtrar-button">Filtrar por precio</button>
+    <button id="total-button">Calcular el total del carrito</button>
+    <button id="limpiar-button">Limpiar carrito</button>
+
+    <!-- Contenedor para mostrar el contenido del carrito -->
     <div id="carrito-container">
         <!-- Aquí se mostrará el contenido del carrito -->
     </div>
 
-    <button id="agregar-button">Agregar bebida</button>
-    <button id="filtrar-button">Filtrar por precio</button>
-    <button id="total-button">Calcular el total del carrito</button>
-    <button id="salir-button">Salir</button>
-
     <script src="main.js"></script>
 </body>
 </html>
+

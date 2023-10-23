@@ -7,13 +7,12 @@ function Vino(nombre, precio, cantidad) {
     this.cantidad = cantidad;
 }
 
-// Definimos el objeto CarritoDeCompras
 function Carrito() {
-    this.vinos = [];
+    this.vinos = []; //array
 
     this.agregarVino = function(vino) {
         this.vinos.push(vino);
-        this.guardarCarritoEnLocalStorage(); // Guardar el carrito en localStorage al agregar un vino
+        this.guardarCarritoEnLocalStorage();
     };
 
     this.filtrarPorPrecio = function(precioMaximo) {
@@ -26,7 +25,7 @@ function Carrito() {
 
     this.mostrarCarrito = function() {
         const carritoContainer = document.getElementById("carrito-container");
-        carritoContainer.innerHTML = ""; // Limpiar el contenido anterior
+        carritoContainer.innerHTML = "";
 
         const carritoList = document.createElement("ul");
         carritoList.className = "carrito-list";
@@ -48,58 +47,57 @@ function Carrito() {
             this.vinos = JSON.parse(carritoGuardado);
         }
     };
+
+    this.limpiarCarrito = function() {
+        this.vinos = [];
+        this.guardarCarritoEnLocalStorage();
+        console.log("Se vació el carrito")
+    }
 }
 
 const carrito = new Carrito();
 carrito.cargarCarritoDesdeLocalStorage();
 
 function agregarProducto() {
-    const nombre = prompt("Nombre del vino: ");
-    const precio = parseFloat(prompt("Precio del vino: "));
-    const cantidad = parseInt(prompt("Cantidad: "));
+    const nombre = document.getElementById("nombre-input").value;
+    const precio = parseFloat(document.getElementById("precio-input").value);
+    const cantidad = parseInt(document.getElementById("cantidad-input").value);
 
-    const vino = new Vino(nombre, precio, cantidad);
-    carrito.agregarVino(vino);
-    console.log(`"${nombre}" se agregó al carrito.`);
-    mostrarMenu();
-}
-
-function mostrarMenu() {
-    console.log("1. Agregar bebida");
-    console.log("2. Mostrar carrito");
-    console.log("3. Filtrar por precio");
-    console.log("4. Calcular el total del carrito");
-    console.log("5. Salir");
-
-    const opcion = prompt("Seleccione una opción: ");
-    switch (opcion) {
-        case '1':
-            agregarProducto();
-            break;
-        case '2':
-            carrito.mostrarCarrito();
-            mostrarMenu();
-            break;
-        case '3':
-            const precioMaximo = parseFloat(prompt("Filtrar productos por precio igual o menor a: "));
-            const vinosFiltrados = carrito.filtrarPorPrecio(precioMaximo);
-            console.log(`Vinos con precio igual o menor a $${precioMaximo}:`);
-            vinosFiltrados.forEach(vino => {
-                console.log(`${vino.nombre} - Precio: $${vino.precio}`);
-            });
-            mostrarMenu();
-            break;
-        case '4':
-            const total = carrito.calcularTotal();
-            console.log(`Total: $${total}`);
-            mostrarMenu();
-            break;
-        case '5':
-            break;
-        default:
-            console.log("Por favor, seleccione una opción válida.");
-            mostrarMenu();
+    if (nombre && !isNaN(precio) && !isNaN(cantidad) && precio > 0 && cantidad > 0) {
+        const vino = new Vino(nombre, precio, cantidad);
+        carrito.agregarVino(vino);
+        console.log(`"${nombre}" se agregó al carrito.`);
+        document.getElementById("nombre-input").value = "";
+        document.getElementById("precio-input").value = "";
+        document.getElementById("cantidad-input").value = "";
+    } else {
+        console.log("Por favor, complete todos los campos correctamente y asegúrese de que el precio y la cantidad sean números positivos.");
     }
 }
 
-mostrarMenu();
+function filtrarPorPrecio() {
+    const precioMaximo = parseFloat(document.getElementById("filtro-precio-input").value);
+
+    if (!isNaN(precioMaximo)) {
+        const vinosFiltrados = carrito.filtrarPorPrecio(precioMaximo);
+        console.log(`Vinos con precio igual o menor a $${precioMaximo}:`);
+        vinosFiltrados.forEach(vino => {
+            console.log(`${vino.nombre} - Precio: $${vino.precio}`);
+        });
+    } else {
+        console.log("Ingrese un precio válido.");
+    }
+}
+
+function calcularTotalCarrito() {
+    const total = carrito.calcularTotal();
+    console.log(`Total: $${total}`);
+}
+
+document.getElementById("agregar-button").addEventListener("click", agregarProducto);
+document.getElementById("filtrar-button").addEventListener("click", filtrarPorPrecio);
+document.getElementById("total-button").addEventListener("click", calcularTotalCarrito);
+document.getElementById("limpiar-button").addEventListener("click", function() {
+    carrito.limpiarCarrito(); // Limpia el carrito
+});
+
