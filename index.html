@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Argentina wine</title>
+    <title>Argentina Wine</title>
 </head>
 <body>
     <h1>Carrito de compras</h1>
@@ -14,32 +14,38 @@
         <input type="text" id="nombre-input">
     </div>
     <div>
-        <label for="precio-input">Precio del vino:</label>
-        <input type="number" id="precio-input" step="0.01">
+        <label for= "precio-input">Precio:</label>
+        <input type="number" id="precio-input" step="1.0">
     </div>
     <div>
         <label for="cantidad-input">Cantidad:</label>
         <input type="number" id="cantidad-input" step="1">
     </div>
 
-    <button id="agregar-button">Agregar bebida</button>
+    <button id="agregar-button">Agregar</button>
 
     <!-- Mostrar resultados del filtro por precio -->
     <div>
         <label for="filtro-precio-input">Filtrar por precio igual o menor a:</label>
-        <input type="number" id="filtro-precio-input" step="0.01">
+        <input type="number" id="filtro-precio-input" step="1">
     </div>
 
     <button id="filtrar-button">Filtrar por precio</button>
     <button id="total-button">Calcular el total del carrito</button>
+    <button id="eliminar-producto-button">Eliminar producto</button>
+    <button id="mostrar-carrito-button">Ver Carrito</button>
     <button id="limpiar-button">Limpiar carrito</button>
 
-    <!-- Contenedor para mostrar el contenido del carrito -->
+    <!-- Contenedor para mostrar el  carrito -->
     <div id="carrito-container">
-        <!-- Aquí se mostrará el contenido del carrito -->
+        
     </div>
 
+
+
+    
     <script src="main.js"></script>
 </body>
 </html>
+
 
