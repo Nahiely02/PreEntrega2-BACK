@@ -1,15 +1,12 @@
-
-//tercera pre-entrega CARRITO DE COMPRAS DE UNA VINOTECA
-/* Defininimos el  objeto Vino*/
+// Definimos el objeto Vino
 function Vino(nombre, precio, cantidad) {
     this.nombre = nombre;
     this.precio = precio;
     this.cantidad = cantidad;
 }
 
-
 function Carrito() {
-    this.vinos = []; //array
+    this.vinos = [];
 
     this.agregarVino = function(vino) {
         this.vinos.push(vino);
@@ -23,7 +20,6 @@ function Carrito() {
     this.calcularTotal = function() {
         return this.vinos.reduce((total, vino) => total + vino.precio * vino.cantidad, 0);
     };
-
 
     this.mostrarCarrito = function() {
         const carritoContainer = document.getElementById("carrito-container");
@@ -67,10 +63,9 @@ function Carrito() {
     this.limpiarCarrito = function() {
         this.vinos = [];
         this.guardarCarritoEnLocalStorage();
-        console.log("Se vació el carrito")
-    }
+        console.log("Se vació el carrito");
+    };
 }
-
 
 const carrito = new Carrito();
 carrito.cargarCarritoDesdeLocalStorage();
@@ -92,8 +87,7 @@ function agregarProducto() {
     }
 }
 
-
-//filtrar por precio maximo
+// Filtrar por precio máximo
 function filtrarPorPrecio() {
     const precioMaximo = parseFloat(document.getElementById("filtro-precio-input").value);
 
@@ -108,22 +102,18 @@ function filtrarPorPrecio() {
     }
 }
 
-
-//calcular toal
+// Calcular total
 function calcularTotalCarrito() {
     const total = carrito.calcularTotal();
     console.log(`Total: $${total}`);
 }
-
 
 // Función para mostrar el carrito
 function mostrarCarrito() {
     carrito.mostrarCarrito();
 }
 
-
-
-// Función para eliminar productos individuales
+// Función para eliminar vinos individuales
 function eliminarProducto(nombre) {
     let encontrado = false;
     for (let i = 0; i < carrito.vinos.length; i++) {
@@ -132,7 +122,7 @@ function eliminarProducto(nombre) {
             if (confirmacion) {
                 carrito.vinos.splice(i, 1);
                 carrito.guardarCarritoEnLocalStorage();
-                carrito.mostrarCarrito(); // Agrega esta línea para actualizar la lista del carrito
+                carrito.mostrarCarrito();
                 console.log(`"${nombre}" se eliminó del carrito.`);
             }
             encontrado = true;
@@ -140,12 +130,10 @@ function eliminarProducto(nombre) {
         }
     }
 
-    if (!encontrado) {//busqueda del producto
+    if (!encontrado) {
         console.log(`El producto "${nombre}" no se encuentra en el carrito.`);
     }
 }
-
-
 
 
 document.getElementById("agregar-button").addEventListener("click", agregarProducto);
@@ -165,4 +153,8 @@ document.getElementById("eliminar-producto-button").addEventListener("click", fu
 document.getElementById("limpiar-button").addEventListener("click", function() {
     carrito.limpiarCarrito(); // Event listener para el botón "Limpiar carrito"
 });
+
+// carga los vinos desde el LocalStorage
+carrito.cargarCarritoDesdeLocalStorage();
+
 
