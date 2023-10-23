@@ -1,3 +1,4 @@
+
 //tercera pre-entrega CARRITO DE COMPRAS DE UNA VINOTECA
 /* Defininimos el  objeto Vino*/
 function Vino(nombre, precio, cantidad) {
@@ -6,26 +7,23 @@ function Vino(nombre, precio, cantidad) {
     this.cantidad = cantidad;
 }
 
+// Definimos el objeto CarritoDeCompras
 function Carrito() {
-    this.vinos = []; /*le agregamos una propiedad de tipo array*/
+    this.vinos = [];
 
-    // Agregar un vino al carrito
     this.agregarVino = function(vino) {
         this.vinos.push(vino);
         this.guardarCarritoEnLocalStorage(); // Guardar el carrito en localStorage al agregar un vino
     };
 
-    // Filtrar vinos por precio
     this.filtrarPorPrecio = function(precioMaximo) {
         return this.vinos.filter(vino => vino.precio <= precioMaximo);
     };
 
-    // Calcular el total del carrito
     this.calcularTotal = function() {
         return this.vinos.reduce((total, vino) => total + vino.precio * vino.cantidad, 0);
     };
 
-    // Mostrar el contenido del carrito
     this.mostrarCarrito = function() {
         const carritoContainer = document.getElementById("carrito-container");
         carritoContainer.innerHTML = ""; // Limpiar el contenido anterior
@@ -105,7 +103,3 @@ function mostrarMenu() {
 }
 
 mostrarMenu();
-
-
-
-
