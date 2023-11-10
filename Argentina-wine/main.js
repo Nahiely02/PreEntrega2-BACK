@@ -16,7 +16,7 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const productos = [
   {
     id: 1,
-    nombre: "Bodega Noemia Malbec 2017",
+    nombre: "Bodega Cheval des Andes Blend 2017",
     precio: 50,
     img: "./assets/CHEVAL-DES-ANDES-Blend.png",
     cantidad: 1,
@@ -51,11 +51,19 @@ const productos = [
   },
   {
     id: 6,
-    nombre: "Chana punco Blend 2021",
+    nombre: "Chanar punco Blend 2021",
     precio: 200,
     img: "./assets/CHANAR-PUNCO-blend.png",
     cantidad: 1,
   },
+  {
+    id: 7,
+    nombre: "El enemigo Bonarda Malbec 2020",
+    precio: 200,
+    img: "./assets/El-Enemigo-Bonarda-El-Mirador.png",
+    cantidad: 1,
+  },
+
 ];
 
 productos.forEach((product) => {
