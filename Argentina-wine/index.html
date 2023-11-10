@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Incluye la hoja de estilos de Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Argentina Wine</title>
+  </head>
+  <body>
+    <!-- Encabezado con título "Argentina Wine" y fondo rojo vino, con fuente sans-serif -->
+    <header class="text-center my-4 bg-primary text-white">
+      <h1 class="display-3 font-sans font-weight-bold p-4">Argentina Wine</h1>
+    </header>
+
+    <!--navBar-->
+    <div class="nav-container">
+      <nav class="navbar">
+        <h2>Tienda online</h2>
+        <h1 class="ver-carrito" id="verCarrito">
+          🛒<span id="cantidadCarrito" class="cantidad-carrito"></span>
+        </>
+      </nav>
+    </div>
+
+    <!--banner-->
+    <div class="banner">
+      <div class="banner-container">
+        <h1>Vinoteca</h1>
+        <p>La mejor calidad la encontras acá</p>
+      </div>
+    </div>
+
+    <!-- Campos de entrada para agregar vinos al carrito -->
+    <div>
+      <label for="nombre-input">Nombre del vino:</label>
+      <input type="text" id="nombre-input" />
+    </div>
+
+    <button id="agregar-button">Agregar</button>
+
+    <!-- Mostrar resultados del filtro por precio -->
+    <div>
+      <label for="filtro-precio-input"
+        >Filtrar por precio igual o menor a:</label
+      >
+      <input type="number" id="filtro-precio-input" step="1" />
+    </div>
+
+    <button id="filtrar-button">Filtrar por precio</button>
+    <button id="limpiar-button">Limpiar carrito</button>
+    <button id="finalizar-compra-button">Finalizar compra</button>
+
+    <!--shop content-->
+    <div id="shopContent" class="shop-content"></div>
+
+    <!--modal container-->
+    <div id="modal-container" class="modal-container"></div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
