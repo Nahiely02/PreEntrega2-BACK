@@ -12,102 +12,59 @@ const modalContainer = document.getElementById("modal-container");
 const cantidadCarrito = document.getElementById("cantidadCarrito");
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+let productos = [];
 
-const productos = [
-  {
-    id: 1,
-    nombre: "Bodega Cheval des Andes Blend 2017",
-    precio: 50,
-    img: "./assets/CHEVAL-DES-ANDES-Blend.png",
-    cantidad: 1,
-  },
-  {
-    id: 2,
-    nombre: "Achaval ferrer Granito 2018",
-    precio: 100,
-    img: "./assets/Achaval-Ferrer-Quimera-Granito.png",
-    cantidad: 1,
-  },
-  {
-    id: 3,
-    nombre: "Bramare Cabernet Franc 2022",
-    precio: 150,
-    img: "./assets/Bramare_CabernetFranc.png",
-    cantidad: 1,
-  },
-  {
-    id: 4,
-    nombre: "Calixto Pablo Merlot 2019",
-    precio: 200,
-    img: "./assets/CALIXTO-PABLO-CORTE-CLASICO-2018.png",
-    cantidad: 1,
-  },
-  {
-    id: 5,
-    nombre: "Caro Blend 2022",
-    precio: 200,
-    img: "./assets/Caro_Blend.png",
-    cantidad: 1,
-  },
-  {
-    id: 6,
-    nombre: "Chanar punco Blend 2021",
-    precio: 200,
-    img: "./assets/CHANAR-PUNCO-blend.png",
-    cantidad: 1,
-  },
-  {
-    id: 7,
-    nombre: "El enemigo Bonarda Malbec 2020",
-    precio: 200,
-    img: "./assets/El-Enemigo-Bonarda-El-Mirador.png",
-    cantidad: 1,
-  },
+const getProducts = async () => {
+  const response = await fetch("data.json");
+  const data = await response.json();
 
-];
+  productos = data;
 
-productos.forEach((product) => {
-  let content = document.createElement("div");
-  content.className = "card";
-  content.innerHTML = `
-    <img src="${product.img}">
-    <h3>${product.nombre}</h3>
-    <p class="price">${product.precio} $</p>
-  `;
+  data.forEach((product) => {
+    let content = document.createElement("div");
+    content.className = "card";
+    content.innerHTML = `
+      <img src="${product.img}">
+      <h3>${product.nombre}</h4>
+      <p class="price">${product.precio} $</p>
+    `;
 
-  shopContent.append(content);
+    shopContent.append(content);
 
-  let comprar = document.createElement("button");
-  comprar.innerText = "comprar";
-  comprar.className = "comprar";
+    let comprar = document.createElement("button");
+    comprar.innerText = "comprar";
+    comprar.className = "comprar";
 
-  content.append(comprar);
+    content.append(comprar);
 
-  comprar.addEventListener("click", () => {
-    const repeat = carrito.some((repeatProduct) => repeatProduct.id === product.id);
+    comprar.addEventListener("click", () => {
+      const repeat = carrito.some((repeatProduct) => repeatProduct.id === product.id);
 
-    if (repeat) {
-      carrito.forEach((prod) => {
-        if (prod.id === product.id) {
-          prod.cantidad++;
-        }
-      });
-    } else {
-      carrito.push({
-        id: product.id,
-        img: product.img,
-        nombre: product.nombre,
-        precio: product.precio,
-        cantidad: product.cantidad,
-      });
-      console.log(carrito);
-      console.log(carrito.length);
-      carritoCounter();
-      saveLocal();
-      pintarCarrito();
-    }
+      if (repeat) {
+        carrito.forEach((prod) => {
+          if (prod.id === product.id) {
+            prod.cantidad++;
+          }
+        });
+      } else {
+        carrito.push({
+          id: product.id,
+          img: product.img,
+          nombre: product.nombre,
+          precio: product.precio,
+          cantidad: 1,
+        });
+        console.log(carrito);
+        console.log(carrito.length);
+        carritoCounter();
+        saveLocal();
+        pintarCarrito();
+      }
+    });
   });
-});
+};
+
+getProducts();
 
 const pintarCarrito = () => {
   modalContainer.innerHTML = "";
@@ -134,7 +91,7 @@ const pintarCarrito = () => {
     carritoContent.className = "modal-content";
     carritoContent.innerHTML = `
         <img src="${product.img}">
-        <h3>${product.nombre}</h3>
+        <h6>${product.nombre}</h6>
         <p>${product.precio} $</p>
         <span class="restar"> - </span>
         <p>${product.cantidad}</p>
@@ -207,72 +164,160 @@ const saveLocal = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
+// Sección de los botones
 document.addEventListener("DOMContentLoaded", function () {
   const nombreInput = document.getElementById("nombre-input");
-
   const agregarButton = document.getElementById("agregar-button");
   const filtroPrecioInput = document.getElementById("filtro-precio-input");
-  const filtrarButton = document.getElementById("filtrar-button");
   const limpiarButton = document.getElementById("limpiar-button");
   const finalizarCompraButton = document.getElementById("finalizar-compra-button");
 
-  // Agregar producto al carrito
-  agregarButton.addEventListener("click", function () {
-    const nombre = nombreInput.value;
+  // Filtrar por precio
+  const mostrarProductos = (productos) => {
+    shopContent.innerHTML = "";
+    productos.forEach((product) => {
+      let content = document.createElement("div");
+      content.className = "card";
+      content.innerHTML = `
+        <img src="${product.img}">
+        <h3>${product.nombre}</h4>
+        <p class="price">${product.precio} $</p>
+      `;
 
-    // Buscar el producto en la lista de productos
-    const productoExistente = productos.find(producto => producto.nombre === nombre);
+      shopContent.append(content);
 
-    if (productoExistente) {
-      const repeat = carrito.some((repeatProduct) => repeatProduct.id === productoExistente.id);
+      let comprar = document.createElement("button");
+      comprar.innerText = "comprar";
+      comprar.className = "comprar";
 
-      if (repeat) {
-        carrito.forEach((prod) => {
-          if (prod.id === productoExistente.id) {
-            prod.cantidad++;
-          }
-        });
-      } else {
-        carrito.push({
-          id: productoExistente.id,
-          img: productoExistente.img,
-          nombre: productoExistente.nombre,
-          precio: productoExistente.precio,
-          cantidad: 1, // Otra opción es asignar una cantidad fija, por ejemplo, 1.
-        });
+      content.append(comprar);
 
-        carritoCounter();
+      comprar.addEventListener("click", () => {
+        // ... (agregar al carrito)
+      });
+    });
+  };
+
+  // Agregamos un evento al campo de entrada de precio
+  filtroPrecioInput.addEventListener("input", () => {
+    // Obtener el valor actual del campo
+    const precioFiltrado = parseFloat(filtroPrecioInput.value);
+
+    // Verifica si el valor es un número
+    if (!isNaN(precioFiltrado)) {
+      // Filtrar los productos según el precio ingresado
+      const productosFiltrados = productos.filter((producto) => producto.precio <= precioFiltrado);
+      mostrarProductos(productosFiltrados);
+    } else {
+      // Si el valor no es un número, mostrar todos los productos
+      mostrarProductos(productos);
+    }
+  });
+
+  // Limpiar carrito
+  limpiarButton.addEventListener("click", () => {
+    Swal.fire({
+      title: "Limpiar Carrito",
+      text: "¿Estás seguro que deseas limpiar el carrito?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        carrito = [];
         saveLocal();
         pintarCarrito();
+        Swal.fire("Carrito limpiado", "", "success");
       }
-    } else {
-      console.log(`El vino ${nombre} no se encuentra en la lista de productos.`);
-    }
-  });
-
-  // Filtrar productos por precio
-  filtrarButton.addEventListener("click", function () {
-    const precioFiltro = parseFloat(filtroPrecioInput.value);
-
-    if (!isNaN(precioFiltro)) {
-      const productosFiltrados = productos.filter(producto => producto.precio <= precioFiltro);
-      // Puedes utilizar los productos filtrados como necesites, por ejemplo, mostrarlos en la interfaz.
-      console.log(productosFiltrados);
-    } else {
-      alert("Por favor, introduce un valor numérico para el filtro de precio.");
-    }
-  });
-
-  // Limpiar el carrito
-  limpiarButton.addEventListener("click", function () {
-    carrito = [];
-    saveLocal();
-    pintarCarrito(); // Actualizar la interfaz del carrito
+    });
   });
 
   // Finalizar compra
-  finalizarCompraButton.addEventListener("click", function () {
-    // Puedes agregar aquí la lógica para finalizar la compra, por ejemplo, enviar la información al servidor, etc.
-    console.log("Compra finalizada");
-  });
+  const finalizarCompra = () => {
+    Swal.fire({
+      title: "Finalizar Compra",
+      text: "¿Deseas finalizar la compra?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Compra Finalizada", "", "success");
+        carrito = [];
+        saveLocal();
+        pintarCarrito();
+      }
+    });
+  };
+  finalizarCompraButton.addEventListener("click", finalizarCompra);
+
+  // Agregar productos
+  const manejarBusqueda = () => {
+    nombreInput.addEventListener("input", () => {
+      const textoBusqueda = nombreInput.value.toLowerCase();
+      const sugerencias = productos.filter(producto =>
+        producto.nombre.toLowerCase().includes(textoBusqueda)
+      );
+      mostrarSugerencias(sugerencias);
+    });
+  };
+
+  const mostrarSugerencias = (sugerencias) => {
+    const sugerenciasContainer = document.getElementById("sugerencias");
+    sugerenciasContainer.innerHTML = "";
+
+    if (sugerencias.length === 0) {
+      const sinCoincidencias = document.createElement("div");
+      sinCoincidencias.innerText = "No está disponible";
+      sugerenciasContainer.appendChild(sinCoincidencias);
+    } else {
+      sugerencias.forEach((producto) => {
+        const sugerenciaElemento = document.createElement("div");
+        sugerenciaElemento.classList.add("sugerencia"); // Agregar la clase "sugerencia"
+        sugerenciaElemento.innerHTML = `
+          <span>${producto.nombre}</span>
+        `;
+        sugerenciasContainer.appendChild(sugerenciaElemento);
+
+        // Agregamos evento de clic al elemento sugerido
+        sugerenciaElemento.addEventListener("click", () => {
+          manejarSeleccionProducto(producto);
+        });
+      });
+    }
+  };
+
+  const manejarSeleccionProducto = (producto) => {
+    const repeat = carrito.some((repeatProduct) => repeatProduct.id === producto.id);
+
+    if (repeat) {
+      carrito.forEach((prod) => {
+        if (prod.id === producto.id) {
+          prod.cantidad++;
+        }
+      });
+    } else {
+      carrito.push({
+        id: producto.id,
+        img: producto.img,
+        nombre: producto.nombre,
+        precio: producto.precio,
+        cantidad: 1,
+      });
+      console.log(carrito);
+      console.log(carrito.length);
+      carritoCounter();
+      saveLocal();
+      pintarCarrito();
+    }
+
+    // Limpiar sugerencias después de seleccionar un producto
+    const sugerenciasContainer = document.getElementById("sugerencias");
+    sugerenciasContainer.innerHTML = "";
+  };
+
+  manejarBusqueda();
 });
+

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "nombre": "Bodega Cheval des Andes Blend 2017",
+    "precio": 50,
+    "img": "./assets/CHEVAL-DES-ANDES-Blend.png",
+    "cantidad": 1
+  },
+  {
+    "id": 2,
+    "nombre": "Achaval ferrer Granito 2018",
+    "precio": 100,
+    "img": "./assets/Achaval-Ferrer-Quimera-Granito.png",
+    "cantidad": 1
+  },
+  {
+    "id": 3,
+    "nombre": "Bramare Cabernet Franc 2022",
+    "precio": 150,
+    "img": "./assets/Bramare_CabernetFranc.png",
+    "cantidad": 1
+  },
+  {
+    "id": 4,
+    "nombre": "Calixto Pablo Merlot 2019",
+    "precio": 200,
+    "img": "./assets/CALIXTO-PABLO-CORTE-CLASICO-2018.png",
+    "cantidad": 1
+  },
+  {
+    "id": 5,
+    "nombre": "Emma Bonarda Blend 2022",
+    "precio": 200,
+    "img": "./assets/Emma_Bonarda.png",
+    "cantidad": 1
+  },
+  {
+    "id": 6,
+    "nombre": "Chanar punco Blend 2021",
+    "precio": 250,
+    "img": "./assets/CHANAR-PUNCO-blend.png",
+    "cantidad": 1
+  },
+  {
+    "id": 7,
+    "nombre": "El enemigo Bonarda Malbec 2020",
+    "precio": 2000,
+    "img": "./assets/El-Enemigo-Bonarda-El-Mirador.png",
+    "cantidad": 1
+  },
+  {
+    "id": 8,
+    "nombre": "Fincas Notables Cabernet Sauvignon 2015",
+    "precio": 1500,
+    "img": "./assets/Fincas-Notables-Cabernet-Sauvignon-2015.png",
+    "cantidad": 1
+  },
+  {
+    "id": 9,
+    "nombre": "Gran Enemigo Malbec 2019",
+    "precio": 3000,
+    "img": "./assets/GranEnemigo_Agrelo.png",
+    "cantidad": 1
+  }
+]

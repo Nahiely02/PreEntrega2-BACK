@@ -13,7 +13,7 @@
     <title>Argentina Wine</title>
   </head>
   <body>
-    <!-- Encabezado con título "Argentina Wine" y fondo rojo vino, con fuente sans-serif -->
+    <!-- Encabezado con título "Argentina Wine" -->
     <header class="text-center my-4 bg-primary text-white">
       <h1 class="display-3 font-sans font-weight-bold p-4">Argentina Wine</h1>
     </header>
@@ -21,50 +21,49 @@
     <!--navBar-->
     <div class="nav-container">
       <nav class="navbar">
-        <h2>Tienda online</h2>
+        <h3>Tienda online</h3>
         <h1 class="ver-carrito" id="verCarrito">
           🛒<span id="cantidadCarrito" class="cantidad-carrito"></span>
-        </>
+        </h1>
       </nav>
     </div>
 
     <!--banner-->
     <div class="banner m-2">
       <div class="banner-container">
-        <h1>Vinoteca</h1>
+        <h2>Vinoteca</h2>
         <p>La mejor calidad la encontras acá</p>
       </div>
     </div>
 
-<!-- Campos de entrada para agregar vinos al carrito -->
-<div class="container mt-4">
-  <div class="row align-items-center">
-    <div class="col-md-6">
-      <label for="nombre-input">Nombre del vino:</label>
-      <input type="text" class="form-control" id="nombre-input" />
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-primary" id="agregar-button">Agregar</button>
-    </div>
-  </div>
+    <!-- Campos de entrada para agregar vinos al carrito -->
+    <div class="container mt-4">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <label for="nombre-input">Nombre del vino:</label>
+          <input type="text" class="form-control" id="nombre-input">
 
-  <!-- Mostrar resultados del filtro por precio -->
-  <div class="row mt-3 align-items-center">
-    <div class="col-md-6">
-      <label for="filtro-precio-input">Filtrar por precio igual o menor a:</label>
-      <input type="number" class="form-control" id="filtro-precio-input" step="1" />
+          <div id="sugerencias" class="sugerencias"></div>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary" id="agregar-button">Agregar</button>
+        </div>
+      </div>
+
+      <!-- Mostrar resultados del filtro por precio -->
+      <div class="row mt-3 align-items-center">
+        <div class="col-md-6">
+          <label for="filtro-precio-input">Filtrar por precio igual o menor a:</label>
+          <input type="number" class="form-control" id="filtro-precio-input" step="1" />
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-warning" id="limpiar-button">Limpiar carrito</button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-success" id="finalizar-compra-button">Finalizar compra</button>
+        </div>
+      </div>
     </div>
-    <div class="col-md-2">
-      <button class="btn btn-secondary" id="filtrar-button">Filtrar por precio</button>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-warning" id="limpiar-button">Limpiar carrito</button>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-success" id="finalizar-compra-button">Finalizar compra</button>
-    </div>
-  </div>
-</div>
 
     <!--shop content-->
     <div id="shopContent" class="shop-content"></div>
@@ -75,3 +74,4 @@
     <script src="main.js"></script>
   </body>
 </html>
+
