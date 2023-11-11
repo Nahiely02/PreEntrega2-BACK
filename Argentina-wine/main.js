@@ -233,25 +233,52 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Finalizar compra
-  const finalizarCompra = () => {
+
+
+
+
+
+ // Finalizar compra
+ finalizarCompraButton.addEventListener("click", () => {
+  // Verificar si el carrito no está vacío antes de intentar finalizar la compra
+  if (carrito.length === 0) {
     Swal.fire({
-      title: "Finalizar Compra",
-      text: "¿Deseas finalizar la compra?",
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonText: "Si",
-      cancelButtonText: "Cancelar"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Compra Finalizada", "", "success");
-        carrito = [];
-        saveLocal();
-        pintarCarrito();
-      }
+      icon: "warning",
+      title: "Carrito Vacío",
+      text: "Agrega productos al carrito antes de finalizar la compra.",
     });
-  };
-  finalizarCompraButton.addEventListener("click", finalizarCompra);
+    return; // Detener la ejecución si el carrito está vacío
+  }
+
+  // Pide el correo electrónico al usuario
+  Swal.fire({
+    title: "Ingrese su email para recibir la factura de su compra",
+    input: "email",
+    inputPlaceholder: "ejemplo@email.com",
+    showCancelButton: true,
+    confirmButtonText: "Enviar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const email = result.value;
+
+      // Muestra un mensaje de "Gracias por su compra" durante 3 segundos
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Gracias por su compra",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+
+      // Puedes hacer algo con el correo electrónico, como enviarlo al servidor, etc.
+      console.log(`Correo electrónico: ${email}`);
+    }
+  });
+});
+
+
+
+
 
   // Agregar productos
   const manejarBusqueda = () => {
