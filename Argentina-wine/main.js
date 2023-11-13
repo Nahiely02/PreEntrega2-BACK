@@ -26,7 +26,7 @@ const getProducts = async () => {
     content.innerHTML = `
       <img src="${product.img}">
       <h3>${product.nombre}</h4>
-      <p class="price">${product.precio} $</p>
+      <p class="price">$ ${product.precio}</p>
     `;
 
     shopContent.append(content);
@@ -92,11 +92,11 @@ const pintarCarrito = () => {
     carritoContent.innerHTML = `
         <img src="${product.img}">
         <h6>${product.nombre}</h6>
-        <p>${product.precio} $</p>
+        <p>$ ${product.precio}</p>
         <span class="restar"> - </span>
         <p>${product.cantidad}</p>
         <span class="sumar"> + </span>
-        <p>Total: ${product.cantidad * product.precio} $</p>
+        <p>Total: $ ${product.cantidad * product.precio}</p>
         <span class="delete-product"> ❌ </span>
       `;
 
@@ -130,7 +130,7 @@ const pintarCarrito = () => {
 
   const totalBuying = document.createElement("div");
   totalBuying.className = "total-content";
-  totalBuying.innerHTML = `Total a pagar: ${total} $`;
+  totalBuying.innerHTML = `Total a pagar: $ ${total} `;
   modalContainer.append(totalBuying);
 };
 
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
         carrito = [];
         saveLocal();
         pintarCarrito();
-        Swal.fire("Carrito limpiado", "", "success");
+        Swal.fire("Carrito vacio", "", "success");
       }
     });
   });

@@ -61,5 +61,63 @@
     "precio": 3000,
     "img": "./assets/GranEnemigo_Agrelo.png",
     "cantidad": 1
+  },
+  {
+    "id": 10,
+    "nombre": "Gran Enemigo Blend 2020",
+    "precio": 2000,
+    "img": "./assets/GranEnemigo_ElCepillo-v.png",
+    "cantidad": 1
+  },
+  {
+    "id": 11,
+    "nombre": "Gran Enemigo Cabernet Sauvignon 2020",
+    "precio": 5000,
+    "img": "./assets/GranEnemigo_Gualtallary-v.png",
+    "cantidad": 1
+  },
+  {
+    "id": 12,
+    "nombre": "Valle de Uco Cabernet Sauvignon 2018",
+    "precio": 2400,
+    "img": "./assets/Riccitelli-Valle-de-Uco-Cabernet-Sauvignon-2018.png",
+    "cantidad": 1
+  },
+  {
+    "id": 13,
+    "nombre": "Rutini Gran Blend 2017",
+    "precio": 6500,
+    "img": "./assets/Rutini_Apartado_Gran_Blend.png",
+    "cantidad": 1
+  },
+  {
+    "id": 14,
+    "nombre": "Rutini Cabernet Sauvignon 2019",
+    "precio": 5300,
+    "img": "./assets/Rutini-Apartado-Cabernet-Sauvignon.png",
+    "cantidad": 1
+  },
+  {
+    "id": 15,
+    "nombre": "Trapiche terrior Cabernet Sauvignon 2020",
+    "precio": 4400,
+    "img": "./assets/Trapiche-Terroir-Series-Laborde-Cabernet-Sauvignon.png",
+    "cantidad": 1
+  },
+  {
+
+    "id": 16,
+    "nombre": "Zorzal Piantao Malbec 2022",
+    "precio": 4600,
+    "img": "./assets/Zorzal_Piantao-v.png",
+    "cantidad": 1
+  },
+  {
+    "id": 17,
+    "nombre": "Zuccardi Malbec 2020",
+    "precio": 7500,
+    "img": "./assets/Zuccardi-Finca-Los-Membrillos.png",
+    "cantidad": 1
   }
 ]
+
