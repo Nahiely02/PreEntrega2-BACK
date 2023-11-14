@@ -1,3 +1,4 @@
+//carrito de compras
 class Vino {
   constructor(nombre, precio, cantidad) {
     this.nombre = nombre;
@@ -32,21 +33,19 @@ const getProducts = async () => {
     shopContent.append(content);
 
     let comprar = document.createElement("button");
-    comprar.innerText = "comprar";
-    comprar.className = "comprar";
+    comprar.innerText = "Comprar";
+    comprar.className = "Comprar";
 
     content.append(comprar);
 
     comprar.addEventListener("click", () => {
-      const repeat = carrito.some((repeatProduct) => repeatProduct.id === product.id);
-
-      if (repeat) {
-        carrito.forEach((prod) => {
-          if (prod.id === product.id) {
-            prod.cantidad++;
-          }
-        });
+      const productoEnCarrito = carrito.find((prod) => prod.id === product.id);
+    
+      if (productoEnCarrito) {
+        // Si el producto ya esta en el carrito, simplemente incrementa la cantidad
+        productoEnCarrito.cantidad++;
       } else {
+        // Si el producto no esta en el carrito, agrega con cantidad 1
         carrito.push({
           id: product.id,
           img: product.img,
@@ -54,12 +53,12 @@ const getProducts = async () => {
           precio: product.precio,
           cantidad: 1,
         });
-        console.log(carrito);
-        console.log(carrito.length);
-        carritoCounter();
-        saveLocal();
-        pintarCarrito();
       }
+    
+      // Luego, actualiza el contador y guarda en localStorage
+      carritoCounter();
+      saveLocal();
+      pintarCarrito();
     });
   });
 };
@@ -154,7 +153,7 @@ const eliminarProducto = (id) => {
 };
 
 const carritoCounter = () => {
-  cantidadCarrito.style.display = "block"; ///
+  cantidadCarrito.style.display = "block"; 
 
   const carritoLength = carrito.reduce((acc, el) => acc + el.cantidad, 0);
 
@@ -168,10 +167,9 @@ const saveLocal = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
-// Sección de los botones
+// Seccion de los botones
 document.addEventListener("DOMContentLoaded", function () {
   const nombreInput = document.getElementById("nombre-input");
-  const agregarButton = document.getElementById("agregar-button");
   const filtroPrecioInput = document.getElementById("filtro-precio-input");
   const limpiarButton = document.getElementById("limpiar-button");
   const finalizarCompraButton = document.getElementById("finalizar-compra-button");
@@ -197,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
       content.append(comprar);
 
       comprar.addEventListener("click", () => {
-        // ... (agregar al carrito)
+        // ... (agregar al carrito) 
       });
     });
   };
@@ -207,13 +205,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Obtener el valor actual del campo
     const precioFiltrado = parseFloat(filtroPrecioInput.value);
 
-    // Verifica si el valor es un número
+    // Verifica si el valor es un numero
     if (!isNaN(precioFiltrado)) {
-      // Filtrar los productos según el precio ingresado
+      // Filtrar los productos segun el precio ingresado
       const productosFiltrados = productos.filter((producto) => producto.precio <= precioFiltrado);
       mostrarProductos(productosFiltrados);
     } else {
-      // Si el valor no es un número, mostrar todos los productos
+      // Si el valor no es un numero, mostrar todos los productos
       mostrarProductos(productos);
     }
   });
@@ -232,6 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
         carrito = [];
         saveLocal();
         pintarCarrito();
+        carritoCounter();
         Swal.fire("Carrito vacio", "", "success");
       }
     });
@@ -244,17 +243,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
  // Finalizar compra
  finalizarCompraButton.addEventListener("click", () => {
-  // Verificar si el carrito no está vacío antes de intentar finalizar la compra
+  // Verificar si el carrito no esta vacio antes de intentar finalizar la compra
   if (carrito.length === 0) {
     Swal.fire({
       icon: "warning",
       title: "Carrito Vacío",
       text: "Agrega productos al carrito antes de finalizar la compra.",
     });
-    return; // Detener la ejecución si el carrito está vacío
+    return; // Detener la ejecución si el carrito esta vacio
   }
 
-  // Pide el correo electrónico al usuario
+  // Pide el correo  al usuario
   Swal.fire({
     title: "Ingrese su email para recibir la factura de su compra",
     input: "email",
@@ -265,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (result.isConfirmed) {
       const email = result.value;
 
-      // Muestra un mensaje de "Gracias por su compra" durante 3 segundos
+      // Muestra un mensaje de "Gracias por su compra" durante 3s
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -274,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
         timer: 3000,
       });
 
-      // Puedes hacer algo con el correo electrónico, como enviarlo al servidor, etc.
+      // Podria enviarse el correo al servidor...
       console.log(`Correo electrónico: ${email}`);
     }
   });
@@ -286,12 +285,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const manejarBusqueda = () => {
     nombreInput.addEventListener("input", () => {
       const textoBusqueda = nombreInput.value.toLowerCase();
+  
+      // Verificar si el campo de busqueda está vacio
+      if (textoBusqueda === "") {
+        // Si esta vacio, ocultar las sugerencias
+        const sugerenciasContainer = document.getElementById("sugerencias");
+        sugerenciasContainer.innerHTML = "";
+        return;
+      }
+  
       const sugerencias = productos.filter(producto =>
         producto.nombre.toLowerCase().includes(textoBusqueda)
       );
       mostrarSugerencias(sugerencias);
     });
   };
+  
 
   const mostrarSugerencias = (sugerencias) => {
     const sugerenciasContainer = document.getElementById("sugerencias");
@@ -337,16 +346,16 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       console.log(carrito);
       console.log(carrito.length);
-      carritoCounter();
-      saveLocal();
-      pintarCarrito();
     }
 
     // Limpiar sugerencias después de seleccionar un producto
     const sugerenciasContainer = document.getElementById("sugerencias");
     sugerenciasContainer.innerHTML = "";
-  };
 
+    pintarCarrito();
+    carritoCounter();
+    saveLocal();
+};
   manejarBusqueda();
 });
 
