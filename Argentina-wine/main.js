@@ -109,6 +109,7 @@ const pintarCarrito = () => {
         product.cantidad--;
       }
       saveLocal();
+      carritoCounter();
       pintarCarrito();
     });
 
@@ -116,6 +117,7 @@ const pintarCarrito = () => {
     sumar.addEventListener("click", () => {
       product.cantidad++;
       saveLocal();
+      carritoCounter();
       pintarCarrito();
     });
 
@@ -123,6 +125,7 @@ const pintarCarrito = () => {
 
     eliminar.addEventListener("click", () => {
       eliminarProducto(product.id);
+      carritoCounter();
     });
   });
 
@@ -151,14 +154,15 @@ const eliminarProducto = (id) => {
 };
 
 const carritoCounter = () => {
-  cantidadCarrito.style.display = "block";
+  cantidadCarrito.style.display = "block"; ///
 
-  const carritoLength = carrito.length;
+  const carritoLength = carrito.reduce((acc, el) => acc + el.cantidad, 0);
 
   localStorage.setItem("carritoLength", JSON.stringify(carritoLength));
 
   cantidadCarrito.innerText = JSON.parse(localStorage.getItem("carritoLength"));
 };
+
 
 const saveLocal = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -275,8 +279,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-
 
 
 
